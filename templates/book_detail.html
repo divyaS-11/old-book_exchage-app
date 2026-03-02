@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}{{ book.title }} - Old Books Exchange{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4">
+        {% if book.image_path %}
+            <img src="{{ url_for('static', filename=book.image_path) }}" alt="{{ book.title }}" class="img-fluid rounded shadow" style="max-height: 400px; object-fit: cover;">
+        {% else %}
+            <div class="bg-light rounded shadow d-flex align-items-center justify-content-center" style="height: 400px;">
+                <span class="text-muted text-center">
+                    📖<br>
+                    No Image Available
+                </span>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="col-lg-8">
+        <h1 class="mb-2">{{ book.title }}</h1>
+        
+        <div class="mb-3">
+            <h4 class="text-primary mb-0">₹{{ "%.2f"|format(book.price) }}</h4>
+            <small class="text-success">Available</small>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p class="mb-2"><strong>Author:</strong> {{ book.author }}</p>
+                        <p class="mb-2"><strong>Subject:</strong> {{ book.subject }}</p>
+                        <p class="mb-2"><strong>Condition:</strong> <span class="badge bg-success">{{ book.condition }}</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="mb-2"><strong>Department:</strong> {{ book.department }}</p>
+                        <p class="mb-2"><strong>Semester:</strong> {{ book.semester }}</p>
+                        <p class="mb-2"><strong>Listed:</strong> {{ book.created_at.strftime('%d %B %Y') if book.created_at else 'Recently' }}</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Seller Information</h5>
+                        <p class="mb-2">
+                            <strong>Name:</strong> {{ book.seller_name }}<br>
+                            <strong>Email:</strong> <a href="mailto:{{ book.seller_email }}">{{ book.seller_email }}</a><br>
+                            <strong>Department:</strong> {{ book.seller_department }}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <p class="card-text">Interested in this book? Contact the seller at the email address above to arrange a purchase.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <a href="{{ url_for('books') }}" class="btn btn-outline-primary">← Back to Books</a>
+            {% if book.seller_email %}
+                <a href="mailto:{{ book.seller_email }}?subject=Interested in {{ book.title }}" class="btn btn-success">Contact Seller</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

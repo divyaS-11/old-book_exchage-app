@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Old Books Exchange{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center py-5 bg-light rounded mb-5">
+    <h1 class="display-4 fw-bold mb-4">Welcome to Old Books Exchange</h1>
+    <p class="lead mb-4">Buy and sell used textbooks from fellow students at the best prices</p>
+    <div class="btn-group gap-2" role="group">
+        {% if user_id %}
+            <a href="{{ url_for('books') }}" class="btn btn-primary btn-lg">Browse Books</a>
+            <a href="{{ url_for('add_book') }}" class="btn btn-success btn-lg">Sell a Book</a>
+        {% else %}
+            <a href="{{ url_for('books') }}" class="btn btn-primary btn-lg">Browse Books</a>
+            <a href="{{ url_for('register') }}" class="btn btn-success btn-lg">Get Started</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h2 class="card-title">📖 Easy to Use</h2>
+                <p class="card-text">Browse thousands of books with advanced filters and search options</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h2 class="card-title">💰 Save Money</h2>
+                <p class="card-text">Buy used books at a fraction of the original price from other students</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h2 class="card-title">🤝 Community</h2>
+                <p class="card-text">Join a community of students helping each other save on textbooks</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h3 class="card-title">How It Works</h3>
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Create an account with your college details</li>
+                    <li class="list-group-item">Upload your used textbooks for sale</li>
+                    <li class="list-group-item">Browse books from other students by department and semester</li>
+                    <li class="list-group-item">Contact sellers and make purchases</li>
+                    <li class="list-group-item">Mark your books as sold when they're gone</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

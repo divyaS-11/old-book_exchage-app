@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}About - Old Books Exchange{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h1 class="mb-4">About Old Books Exchange</h1>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Our Mission</h5>
+            </div>
+            <div class="card-body">
+                <p>Old Books Exchange is a student-to-student platform designed to help college and university students save money on textbooks. We believe that quality education should be accessible without breaking the bank.</p>
+                <p>Our platform allows students to buy and sell used textbooks within their academic community, creating a sustainable and cost-effective solution for educational materials.</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Why Use Old Books Exchange?</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <h6 class="mb-1">💰 Save Money</h6>
+                        <p class="text-muted">Buy textbooks at 40-70% off the original price from fellow students.</p>
+                    </li>
+                    <li class="mb-3">
+                        <h6 class="mb-1">🎓 Trusted Community</h6>
+                        <p class="text-muted">Buy and sell only within your college/university community of verified students.</p>
+                    </li>
+                    <li class="mb-3">
+                        <h6 class="mb-1">📚 Wide Selection</h6>
+                        <p class="text-muted">Browse thousands of books across all departments and semesters.</p>
+                    </li>
+                    <li class="mb-3">
+                        <h6 class="mb-1">♻️ Sustainable</h6>
+                        <p class="text-muted">Reduce waste by giving textbooks a second life instead of buying new ones.</p>
+                    </li>
+                    <li class="mb-3">
+                        <h6 class="mb-1">📱 Easy to Use</h6>
+                        <p class="text-muted">Simple registration, listing, and browsing process.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">How It Works</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li class="mb-3"><strong>Register:</strong> Create an account with your college email and details.</li>
+                    <li class="mb-3"><strong>List Books:</strong> Upload your used textbooks with photos and descriptions.</li>
+                    <li class="mb-3"><strong>Browse:</strong> Search and filter books by department, semester, subject, and price.</li>
+                    <li class="mb-3"><strong>Connect:</strong> Contact sellers directly through the platform to arrange purchases.</li>
+                    <li class="mb-3"><strong>Trade:</strong> Meet up on campus or arrange convenient pickup/delivery.</li>
+                    <li class="mb-3"><strong>Mark as Sold:</strong> Update your listing status once the book is sold.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Safety & Trust</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Verified Users:</strong> All users must register with their college details
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Detailed Listings:</strong> Detailed book information and condition ratings help set expectations
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Secure Transactions:</strong> Direct contact information for safe transactions
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Community Standards:</strong> Honest sellers and buyers maintain platform integrity
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-5 text-center">
+            <h5>Ready to Get Started?</h5>
+            <p class="text-muted mb-3">Join thousands of students already saving money on textbooks</p>
+            <div class="btn-group gap-2" role="group">
+                <a href="{{ url_for('books') }}" class="btn btn-primary btn-lg">Browse Books</a>
+                <a href="{{ url_for('register') }}" class="btn btn-success btn-lg">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

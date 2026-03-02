@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Book - Old Books Exchange{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <h2 class="mb-4">Edit Book Listing</h2>
+        
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data" novalidate>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="title" class="form-label">Book Title <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ book.title }}" required>
+                            <small class="form-text text-muted">At least 3 characters</small>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="author" class="form-label">Author <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="author" name="author" value="{{ book.author }}" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="subject" class="form-label">Subject <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="subject" name="subject" value="{{ book.subject }}" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="department" class="form-label">Department <span class="text-danger">*</span></label>
+                            <select class="form-control" id="department" name="department" required>
+                                <option value="">Select Department</option>
+                                <option value="Computer Science" {% if book.department == 'Computer Science' %}selected{% endif %}>Computer Science</option>
+                                <option value="Electronics" {% if book.department == 'Electronics' %}selected{% endif %}>Electronics</option>
+                                <option value="Mechanical" {% if book.department == 'Mechanical' %}selected{% endif %}>Mechanical</option>
+                                <option value="Civil" {% if book.department == 'Civil' %}selected{% endif %}>Civil</option>
+                                <option value="Electrical" {% if book.department == 'Electrical' %}selected{% endif %}>Electrical</option>
+                                <option value="Chemical" {% if book.department == 'Chemical' %}selected{% endif %}>Chemical</option>
+                                <option value="Information Technology" {% if book.department == 'Information Technology' %}selected{% endif %}>Information Technology</option>
+                                <option value="Commerce" {% if book.department == 'Commerce' %}selected{% endif %}>Commerce</option>
+                                <option value="Arts" {% if book.department == 'Arts' %}selected{% endif %}>Arts</option>
+                                <option value="Science" {% if book.department == 'Science' %}selected{% endif %}>Science</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="semester" class="form-label">Semester <span class="text-danger">*</span></label>
+                            <select class="form-control" id="semester" name="semester" required>
+                                <option value="">Select Semester</option>
+                                <option value="1st Semester" {% if book.semester == '1st Semester' %}selected{% endif %}>1st Semester</option>
+                                <option value="2nd Semester" {% if book.semester == '2nd Semester' %}selected{% endif %}>2nd Semester</option>
+                                <option value="3rd Semester" {% if book.semester == '3rd Semester' %}selected{% endif %}>3rd Semester</option>
+                                <option value="4th Semester" {% if book.semester == '4th Semester' %}selected{% endif %}>4th Semester</option>
+                                <option value="5th Semester" {% if book.semester == '5th Semester' %}selected{% endif %}>5th Semester</option>
+                                <option value="6th Semester" {% if book.semester == '6th Semester' %}selected{% endif %}>6th Semester</option>
+                                <option value="7th Semester" {% if book.semester == '7th Semester' %}selected{% endif %}>7th Semester</option>
+                                <option value="8th Semester" {% if book.semester == '8th Semester' %}selected{% endif %}>8th Semester</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="condition" class="form-label">Book Condition <span class="text-danger">*</span></label>
+                            <select class="form-control" id="condition" name="condition" required>
+                                <option value="">Select Condition</option>
+                                <option value="Like New" {% if book.condition == 'Like New' %}selected{% endif %}>Like New</option>
+                                <option value="Excellent" {% if book.condition == 'Excellent' %}selected{% endif %}>Excellent</option>
+                                <option value="Good" {% if book.condition == 'Good' %}selected{% endif %}>Good</option>
+                                <option value="Fair" {% if book.condition == 'Fair' %}selected{% endif %}>Fair</option>
+                                <option value="Poor" {% if book.condition == 'Poor' %}selected{% endif %}>Poor</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="price" class="form-label">Price (₹) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" value="{{ book.price }}" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="image" class="form-label">Book Image</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/jpeg,image/png">
+                            <small class="form-text text-muted">JPG or PNG (max 16MB)</small>
+                            {% if book.image_path %}
+                                <div class="mt-2">
+                                    <img src="{{ url_for('static', filename=book.image_path) }}" alt="Current image" style="max-width: 150px; max-height: 150px;">
+                                    <p class="small text-muted mt-1">Current image</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <button type="submit" class="btn btn-warning btn-lg">Update Book</button>
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary btn-lg">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
+{% endblock %}

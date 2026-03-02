@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Browse Books - Old Books Exchange{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Available Books</h2>
+
+<!-- Search and Filter Section -->
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="GET" class="row g-3">
+            <div class="col-md-5">
+                <label for="search" class="form-label">Search Books</label>
+                <input type="text" class="form-control" id="search" name="search" placeholder="Title, Author, or Subject..." value="{{ search }}">
+            </div>
+            <div class="col-md-3">
+                <label for="department" class="form-label">Department</label>
+                <select class="form-control" id="department" name="department">
+                    <option value="">All Departments</option>
+                    {% for dept in departments %}
+                        <option value="{{ dept.department }}" {% if selected_department == dept.department %}selected{% endif %}>{{ dept.department }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="semester" class="form-label">Semester</label>
+                <select class="form-control" id="semester" name="semester">
+                    <option value="">All Semesters</option>
+                    {% for sem in semesters %}
+                        <option value="{{ sem.semester }}" {% if selected_semester == sem.semester %}selected{% endif %}>{{ sem.semester }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+            <div class="col-md-12">
+                <a href="{{ url_for('books') }}" class="btn btn-outline-secondary">Clear Filters</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Books Display -->
+{% if books %}
+    <div class="row g-4">
+        {% for book in books %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 book-card">
+                    {% if book.image_path %}
+                        <img src="{{ url_for('static', filename=book.image_path) }}" class="card-img-top" alt="{{ book.title }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <span class="text-muted">📖 No Image</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">
+                            <small class="text-muted">by {{ book.author }}</small><br>
+                            <strong class="text-primary">₹{{ "%.2f"|format(book.price) }}</strong>
+                        </p>
+                        <div class="mb-2">
+                            <span class="badge bg-info">{{ book.department }}</span>
+                            <span class="badge bg-secondary">{{ book.semester }}</span>
+                        </div>
+                        <p class="card-text">
+                            <small>Subject: {{ book.subject }}</small><br>
+                            <small>Condition: <strong>{{ book.condition }}</strong></small><br>
+                            <small class="text-muted">by {{ book.seller_name }}</small>
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white">
+                        <a href="{{ url_for('book_detail', book_id=book.id) }}" class="btn btn-primary btn-sm w-100">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        <h5 class="alert-heading">No books found</h5>
+        <p>No books match your search criteria. Try adjusting your filters or search terms.</p>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

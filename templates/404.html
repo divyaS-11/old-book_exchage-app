@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found - Old Books Exchange{% endblock %}
+
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-1">404</h1>
+    <p class="lead mb-4">Page Not Found</p>
+    <p class="mb-4">Sorry, the page you're looking for doesn't exist.</p>
+    <a href="{{ url_for('home') }}" class="btn btn-primary btn-lg">Go Home</a>
+</div>
+{% endblock %}
