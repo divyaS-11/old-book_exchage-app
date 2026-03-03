@@ -85,6 +85,18 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+> **Environment variables:**
+>
+> - `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DB` are read at runtime. The class in `config/config.py` provides a development default password (`saran@6383086255`); if you change your local MySQL password or want to override any values, export them before running the app:
+>
+> ```powershell
+> set MYSQL_PASSWORD=your_password_here
+> set FLASK_CONFIG=development  # optional, default is development
+> python app.py
+> ```
+> 
+> - `SECRET_KEY` can also be set to keep sessions secure, though a default string is supplied for convenience.
+
 ### Step 4: Setup MySQL Database
 
 1. Open MySQL Command Line or MySQL Workbench
@@ -99,6 +111,37 @@ source schema.sql
 ```
 
 Or copy-paste the entire content of `schema.sql` into MySQL:
+
+---
+
+### Deploying to Vercel
+
+The app can be hosted on Vercel using the Python serverless runtime. A `vercel.json` file (included in the repository) configures the deployment:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    { "src": "app.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "app.py" }
+  ]
+}
+```
+
+**Steps to deploy:**
+
+1. Install [Vercel CLI](https://vercel.com/docs/cli) (`npm i -g vercel`) or use the Vercel dashboard.
+2. From the project root run `vercel` and follow the prompts.
+3. In the Vercel dashboard add the following environment variables under *Settings → Environment Variables*:
+   - `FLASK_CONFIG=production`
+   - `MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DB` (your database credentials)
+   - `SECRET_KEY` (a long, random string)
+4. After deployment, the home page should load rather than showing a 404.
+
+Refer to Vercel's [Python runtime documentation](https://vercel.com/docs/runtimes#official-runtimes/python) for more details.
+
 
 ```sql
 -- Create Database

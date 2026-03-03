@@ -5,10 +5,11 @@ class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'old-books-exchange-secret-key-2026'
     
     # MySQL Configuration
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
-    MYSQL_PASSWORD = 'saran@6383086255'  # Change to your MySQL password
-    MYSQL_DB = 'old_books_exchange'
+    MYSQL_HOST = os.environ.get('MYSQL_HOST', 'localhost')
+    MYSQL_USER = os.environ.get('MYSQL_USER', 'root')
+    # use environment variable if provided; otherwise fall back to local dev password
+    MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD', 'saran@6383086255')  # update or override via env in production
+    MYSQL_DB = os.environ.get('MYSQL_DB', 'old_books_exchange')
     MYSQL_CURSORCLASS = 'DictCursor'
     
     # Session Configuration
@@ -42,4 +43,5 @@ config = {
     'production': ProductionConfig,
     'testing': TestingConfig,
     'default': DevelopmentConfig
-}
+}  # you can select via FLASK_CONFIG env var
+

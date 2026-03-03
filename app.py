@@ -11,8 +11,11 @@ from mysql.connector import Error
 app = Flask(__name__)
 
 # Load configuration
-from config.config import DevelopmentConfig
-app.config.from_object(DevelopmentConfig)
+from config.config import config
+
+# choose configuration via FLASK_CONFIG env var (development/production/testing)
+config_name = os.environ.get('FLASK_CONFIG', 'default')
+app.config.from_object(config.get(config_name, config['default']))
 
 # Ensure upload folder exists
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
